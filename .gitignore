@@ -1,0 +1,72 @@
+############################
+# Java / Spring Boot
+############################
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+############################
+# Maven
+############################
+.mvn/
+!wrapper/maven-wrapper.jar
+
+############################
+# Gradle
+############################
+.gradle/
+build/
+
+############################
+# Logs
+############################
+*.log
+logs/
+
+############################
+# IDE
+############################
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+############################
+# OS files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# Docker
+############################
+docker-compose.override.yml
+
+############################
+# Environment files
+############################
+.env
+.env.*
+*.env
+
+############################
+# Node (hvis frontend finnes)
+############################
+node_modules/
+dist/
+
+############################
+# Codespaces
+############################
+.devcontainer/
+
+
+# AWS CLI install files
+awscliv2.zip
+aws/
+install
+THIRD_PARTY_LICENSES

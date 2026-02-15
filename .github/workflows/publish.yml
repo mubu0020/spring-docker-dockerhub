@@ -1,0 +1,33 @@
+name: Publish Docker image to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push_to_registry:
+    name: Build and Push Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-west-1.amazonaws.com
+
+      - name: Build, tag, and push Docker image
+        run: |
+          IMAGE_TAG=$(git rev-parse --short HEAD)
+          docker build -t ilyas-sin-container .
+          docker tag ilyas-sin-container 244530008913.dkr.ecr.eu-west-1.amazonaws.com/ilyas-sin-repo:$IMAGE_TAG
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/ilyas-sin-repo:$IMAGE_TAG
